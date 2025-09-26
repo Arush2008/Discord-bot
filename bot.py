@@ -13,6 +13,8 @@ import os
 import json
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
+from aiohttp import web
+import threading
 
 # Load environment variables from .env file
 load_dotenv()
@@ -1751,10 +1753,39 @@ async def on_command_error(ctx, error):
         print(f"   Content: {ctx.message.content}")
         await ctx.send("❌ An unexpected error occurred! Please try again or contact an admin.")
 
-# Run the bot
-if __name__ == "__main__":
+# Simple web server for Render (to keep free tier happy)
+async def health_check(request):
+    return web.Response(text="Discord Bot is running! 🤖", status=200)
+
+async def start_web_server():
+    app = web.Application()
+    app.router.add_get('/', health_check)
+    app.router.add_get('/health', health_check)
+    
+    port = int(os.environ.get('PORT', 8080))
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', port)
+    await site.start()
+    print(f"🌐 Web server started on port {port}")
+
+# Run both the bot and web server
+async def main():
+    # Start web server first
+    await start_web_server()
+    
+    # Start Discord bot
     token = os.getenv('DISCORD_BOT_TOKEN')
     if token:
-        bot.run(token)
+        print("🤖 Starting Discord bot...")
+        await bot.start(token)
     else:
         print("Error: DISCORD_BOT_TOKEN environment variable not set!")
+
+if __name__ == "__main__":
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("🛑 Bot stopped by user")
+    except Exception as e:
+        print(f"❌ Error starting bot: {e}")
