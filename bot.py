@@ -1,3 +1,9 @@
+# Import audioop compatibility fix first (for Python 3.13+)
+try:
+    import audioop_fix
+except ImportError:
+    pass  # audioop_fix not needed if audioop is available
+
 import discord
 from discord.ext import commands
 import random
