@@ -1,0 +1,40 @@
+{
+  "934723467675332608": {
+    "coins": 3468568743659823632477916608,
+    "last_daily": "2025-09-26T15:07:56.685423",
+    "last_work": null,
+    "purchased_items": [
+      "elite_role",
+      "legendary_role",
+      "premium_role",
+      "vip_role",
+      "say_unlock"
+    ],
+    "unlocked_commands": [
+      "say"
+    ]
+  },
+  "883516391074971698": {
+    "coins": 0,
+    "last_daily": "2025-09-26T12:40:29.089644",
+    "last_work": "2025-09-26T12:41:50.693175",
+    "purchased_items": [
+      "elite_role"
+    ],
+    "unlocked_commands": []
+  },
+  "1420734569103233036": {
+    "coins": 0,
+    "last_daily": null,
+    "last_work": null,
+    "purchased_items": [],
+    "unlocked_commands": []
+  },
+  "786149702709936158": {
+    "coins": 2423,
+    "last_daily": "2025-09-26T15:18:38.851135",
+    "last_work": null,
+    "purchased_items": [],
+    "unlocked_commands": []
+  }
+}
